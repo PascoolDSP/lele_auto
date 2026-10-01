@@ -1,0 +1,85 @@
+/* Excel-like viewer + index. Tokens first. */
+:root {
+  --xl-green: #217346;
+  --xl-green-dark: #185c37;
+  --chrome: #f3f3f3;
+  --chrome-line: #d4d4d4;
+  --chrome-text: #444;
+  --paper: #faf9f7;
+  --ink: #1d1d1f;
+  --muted: #5b5b60;
+  --select: #217346;
+  --ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font-family: var(--ui); color: var(--ink); background: var(--paper); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--xl-green); outline-offset: 2px; }
+
+/* ---------- index ---------- */
+.index { max-width: 72rem; margin: 0 auto; padding: 4rem 1.25rem 5rem; }
+.kicker { font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; color: var(--xl-green-dark); margin: 0 0 .75rem; font-weight: 600; }
+.ihead h1 { font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.02; margin: 0 0 1rem; letter-spacing: -.02em; }
+.lead { font-size: 1.0625rem; line-height: 1.6; color: var(--muted); max-width: 44rem; margin: 0 0 3rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); gap: 1rem; }
+.card { display: flex; flex-direction: column; gap: .6rem; padding: 1.25rem 1.25rem 1rem; background: #fff; border: 1px solid #e3e1dc; border-radius: 10px; text-decoration: none; transition: border-color .2s, transform .2s cubic-bezier(.16,1,.3,1), box-shadow .2s; min-height: 44px; }
+.card:hover, .card:focus-visible { border-color: var(--xl-green); transform: translateY(-2px); box-shadow: 0 8px 24px -12px rgba(0,0,0,.18); }
+.num { font: 700 .8125rem/1 var(--ui); color: #fff; background: var(--xl-green); width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 6px; }
+.cname { font-size: 1.25rem; font-weight: 650; line-height: 1.2; }
+.idea { font-size: .9375rem; line-height: 1.55; color: var(--muted); flex: 1; }
+.file { font: .75rem/1.4 ui-monospace, Menlo, Consolas, monospace; color: #6b6b70; border-top: 1px solid #eee; padding-top: .6rem; }
+
+/* ---------- viewer shell ---------- */
+.app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; overflow: hidden; background: #fff; }
+.titlebar { display: flex; align-items: center; gap: 1rem; background: var(--xl-green); color: #fff; padding: 0 .75rem; height: 44px; flex: none; font-size: .875rem; }
+.titlebar a { text-decoration: none; }
+.home { padding: .5rem .25rem; white-space: nowrap; }
+.fname { flex: 1; text-align: center; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tb-right { display: flex; align-items: center; gap: .25rem; }
+.nav { display: grid; place-items: center; width: 44px; height: 44px; font-size: 1.5rem; }
+.nav.off { opacity: .35; }
+.nav:hover, .home:hover, .dl:hover { background: var(--xl-green-dark); }
+.dl { border: 1px solid rgba(255,255,255,.6); border-radius: 4px; padding: .35rem .7rem; margin-left: .5rem; white-space: nowrap; }
+.fbar { display: flex; align-items: stretch; height: 28px; border-bottom: 1px solid var(--chrome-line); font: 12px/28px Calibri, Arial, sans-serif; flex: none; }
+.namebox { width: 90px; border-right: 1px solid var(--chrome-line); padding: 0 8px; }
+.fx { width: 36px; text-align: center; color: #777; font-style: italic; border-right: 1px solid var(--chrome-line); }
+.fcontent { flex: 1; padding: 0 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: Consolas, ui-monospace, monospace; }
+.sheets { flex: 1; min-height: 0; position: relative; }
+.sheet { position: absolute; inset: 0; }
+.sheet[hidden] { display: none; }
+.grid { position: relative; width: 100%; height: 100%; overflow: auto; background: #fff; }
+.tabs { display: flex; gap: 0; background: var(--chrome); border-top: 1px solid var(--chrome-line); overflow-x: auto; flex: none; padding-left: 42px; }
+.tab { font: 12px Calibri, Arial, sans-serif; border: 0; border-right: 1px solid var(--chrome-line); background: transparent; color: var(--chrome-text); padding: 0 16px; height: 32px; white-space: nowrap; cursor: pointer; }
+.tab:hover { background: #e6e6e6; }
+.tab.on { background: #fff; color: var(--xl-green); font-weight: 700; box-shadow: inset 0 -3px 0 var(--xl-green); }
+.status { display: flex; justify-content: space-between; gap: 1rem; background: var(--xl-green); color: #fff; font-size: 12px; padding: 0 .75rem; height: 24px; align-items: center; flex: none; }
+.status .note { opacity: .85; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ---------- Excel grid ---------- */
+table.xl { border-collapse: collapse; table-layout: fixed; width: max-content; font-family: Arial, sans-serif; font-size: 10pt; }
+table.xl th { background: var(--chrome); color: #666; font: 11px Calibri, Arial, sans-serif; font-weight: 400; border: 1px solid var(--chrome-line); height: 22px; position: sticky; top: 0; z-index: 3; }
+table.xl th.rh { position: sticky; left: 0; top: auto; z-index: 2; text-align: center; }
+table.xl th.rh.fr { z-index: 4; }
+table.xl th.corner { left: 0; z-index: 5; }
+table.xl thead th.fc { z-index: 5; }
+table.xl td { padding: 0 3px; overflow: hidden; white-space: nowrap; text-overflow: clip; background-clip: padding-box; }
+table.xl td.ov { overflow: visible; position: relative; z-index: 1; }
+table.xl td.fr, table.xl td.fc { position: sticky; z-index: 1; }
+table.xl td.fr:not(.f), table.xl td.fc:not(.f) { background-color: #fff; }
+table.xl td.fr.fc { z-index: 2; }
+table.xl td.ov.fr, table.xl td.ov.fc { z-index: 3; }
+table.xl td.sel { outline: 2px solid var(--select); outline-offset: -1px; }
+table.xl td.cm:not(.fr):not(.fc) { position: relative; }
+table.xl td.cm::after { content: ""; position: absolute; top: 0; right: 0; border: 4px solid transparent; border-top-color: #c00; border-right-color: #c00; }
+.chart { position: absolute; z-index: 1; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.chart svg { display: block; }
+@media (max-width: 640px) {
+  .fname, .status .note, .home { font-size: .8125rem; }
+  .namebox { width: 60px; }
+}
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
+table.xl td.hid { padding: 0; border: 0; }
+.series + .series { margin-top: 4rem; }
+.series h2 { font-size: 1.5rem; margin: 0 0 .35rem; letter-spacing: -.01em; }
+.sdesc { color: var(--muted); margin: 0 0 1.5rem; line-height: 1.5; }

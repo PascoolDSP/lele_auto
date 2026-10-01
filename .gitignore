@@ -1,0 +1,19 @@
+# Private inbox / generated deliverables (personal data, screenshots)
+share/
+
+# Local Python environment
+tools/.venv/
+__pycache__/
+*.pyc
+
+# Home-server scaffold copied by newproj (infrastructure details, Discord tooling)
+GENERAL_CONTEXT.md
+DISCORD.md
+NEW_DISCORD_CHANNEL.md
+NEW_DOMAIN.md
+discord_*.py
+.discord_channel_id
+
+# Secrets
+.env
+*.key
