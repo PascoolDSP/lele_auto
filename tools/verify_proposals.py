@@ -50,6 +50,12 @@ SAMPLES = {
     "18": [("Essentiel 1", "'CHAQUE SEMAINE'!A7"), ("Essentiel 6", "'CHAQUE SEMAINE'!A12"), ("Autre 1", "'UNE FOIS PAR MOIS'!A6")],
     "19": [("Utilisé S1 farine", "'OCTOBRE 2026'!G7"), ("Utilisé S2", "'OCTOBRE 2026'!K7")],
     "20": [("À traiter S1", "'OCTOBRE 2026'!G3"), ("À traiter S3", "'OCTOBRE 2026'!O3")],
+    "30": [("Dépensé oct", "'TABLEAU DE BORD'!A6"), ("Livr. incomplètes", "'TABLEAU DE BORD'!C6"),
+           ("Sous mini", "'TABLEAU DE BORD'!E6"), ("Suivis", "'TABLEAU DE BORD'!G6"), ("Top1", "'TABLEAU DE BORD'!B12"),
+           ("Farine S1 bar", "'TABLEAU DE BORD'!C26"), ("Farine S3 bar (vide)", "'TABLEAU DE BORD'!E26"), ("Farine évol", "'TABLEAU DE BORD'!G26"), ("Farine alerte", "'TABLEAU DE BORD'!J26"),
+           ("Oct farine reçu", "OCTOBRE!U7"), ("Oct farine écart", "OCTOBRE!V7"), ("Oct farine dépense", "OCTOBRE!X7"),
+           ("Oct total dépenses", "OCTOBRE!X71"), ("Année farine oct reçu", "'ANNÉE 2026'!L6"), ("Année dépense total oct", "'ANNÉE 2026'!L130"), ("Année stock fin oct farine", "'ANNÉE 2026'!L135"),
+           ("Réception unité", "RÉCEPTIONS!E5"), ("Réception état", "RÉCEPTIONS!I12"), ("Réception jours", "RÉCEPTIONS!H12")],
     "10": [("Bilan farine", "'OCTOBRE 2026'!C178")],
 }
 

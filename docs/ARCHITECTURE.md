@@ -9,6 +9,7 @@ previews them with an Excel-like rendering for Pascal's review.
 ## Folder / module map
 - `tools/build_proposals.py` — generates the 10 xlsx proposals into `share/out/propositions_stock/`.
 - `tools/build_proposals_2.py` — generates proposals 11-20 (reuses the helpers of build_proposals.py).
+- `tools/build_final.py` — the merged v1 workbook for Lele (proposal 30), reuses build_proposals.py helpers.
 - `tools/verify_proposals.py` — evaluates every formula with the `formulas` engine, reports errors and sample values.
 - `tools/render_site.py` — renders each xlsx to `site/propositions/NN.html` (+ `site/index.html`, `site/files/`).
 - `tools/.venv/` — local venv with `formulas` + `openpyxl` (run the verify/render scripts with it).
@@ -19,5 +20,8 @@ previews them with an Excel-like rendering for Pascal's review.
 - Conditional formatting is evaluated by copying each rule, translated per cell, into a helper sheet
   of a temporary workbook copy, then computing it with the same engine.
 - openpyxl cannot read charts back: charts shown in the viewer are declared in `CHARTS` in render_site.py.
+- Dashboard month selector: MATCH on a hidden month list + CHOOSE across the 12 month sheets (no INDIRECT,
+  portable to Sheets/LibreOffice); every CHOOSE pick is wrapped in ISNUMBER because an empty input cell read
+  through CHOOSE is 0 in Excel, not blank.
 - Pipeline after any change: build_proposals(_2).py -> verify_proposals.py -> render_site.py.
 - The `formulas` engine mishandles the `"<>"` (non-blank) criterion in COUNTIFS: use `">=0"` or SUMPRODUCT instead.

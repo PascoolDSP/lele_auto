@@ -23,8 +23,21 @@ Source material (voice notes, texts, sketch) came in Lele.zip; transcripts were 
   (`tools/render_site.py`, values from the `formulas` engine, conditional formatting evaluated).
   Served on http://192.168.1.100:8147 / https://lele-auto.home/.
 
+## Discord
+- A session thread exists in the project channel for status updates. Channel and thread IDs live in the
+  untracked local files (see `.gitignore`) — this repo is public, so they stay out of it.
+
+## Lele's feedback (2026-10-03 / 10-10)
+- Base = proposal 8 (yearly). Wants: dashboard (all KPIs incl. euros), trend bars, products grouped by
+  zone — Réserve sèche / Chambre froide positive / Chambre froide négative / Ménager —, an order date per
+  week, and a reception register (date, product, supplier per line, quantity, lot number, DLC) replacing
+  her paper notebook (photo received). Drops "ce que j'ai utilisé".
+- Open with her: keep the quantity column in the register? (asked in voice note, absent from notebook).
+  Unpaid, volunteer work.
+
 ## In progress
-- Send the 10 proposals to Lele and collect her feedback.
+- v1 merged workbook built: `share/out/propositions_stock/30_version_lele_v1.xlsx`
+  (`tools/build_final.py`, verified 0 errors, previewed as proposal 30 on the site). To send to Lele.
 
 ## Next
 - Iterate on the chosen proposal(s) from her feedback.

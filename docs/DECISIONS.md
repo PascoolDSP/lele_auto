@@ -10,3 +10,5 @@
 - 2026-09-24 — No cross-sheet references inside conditional formatting — Google Sheets does not support them.
 - 2026-09-25 — Batch 2 stays within Lele's brief (no recipe deduction, no Apps Script, no Google Forms) — scripts and buttons do not run in the Sheets mobile app, and xlsx must work in both Excel and Sheets.
 - 2026-09-25 — No FILTER/SPARKLINE: lists use INDEX/MATCH on a rank helper, trends use REPT bars — portable across Excel, Sheets and LibreOffice.
+- 2026-10-10 — v1 for Lele = proposal 8 + dashboard + trend bars + zones + order date + reception register, per her feedback; register keeps a supplier column per line (she buys elsewhere when the usual supplier is out).
+- 2026-10-10 — Unit price entered once per product (Produits tab), reused by the dashboard every month; spend is approximate when she buys from another supplier — accepted to avoid per-delivery price entry.

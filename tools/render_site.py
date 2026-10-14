@@ -28,6 +28,8 @@ HELPER = "__cf"
 CHARTS = {
     "07": [{"sheet": "Tableau de bord", "anchor": "A23", "title": "Dépenses du mois (€)",
             "cats": "B11:B20", "vals": "E11:E20", "color": "#3D3D3D", "w": 529, "h": 283}],
+    "30": [{"sheet": "Tableau de bord", "anchor": "G10", "title": "Dépenses du mois (€)",
+            "cats": "B12:B21", "vals": "E12:E21", "color": "#2E6B3F", "w": 529, "h": 283}],
 }
 
 
@@ -437,9 +439,11 @@ def build():
                 f'<span class="idea">{html.escape(idea)}</span>'
                 f'<span class="file">{html.escape(fname)}</span></a>')
 
-    series = [("Première série", "Variantes de mise en page de sa demande.", [c for c in cards if int(c[0]) <= 10]),
+    series = [("Version pour Lele", "Fusion construite sur la n°8 d'après ses retours des 3 et 10 octobre.",
+               [c for c in cards if int(c[0]) >= 30]),
+              ("Première série", "Variantes de mise en page de sa demande.", [c for c in cards if int(c[0]) <= 10]),
               ("Deuxième série", "Inspirée des modèles existants : cadencier, ordre de la réserve, fiche papier, DLC, pertes…",
-               [c for c in cards if int(c[0]) > 10])]
+               [c for c in cards if 10 < int(c[0]) < 30])]
     grid = "".join(
         f'<section class="series"><h2>{t}</h2><p class="sdesc">{d}</p><div class="cards">'
         + "".join(card_html(*c) for c in cs) + "</div></section>"
