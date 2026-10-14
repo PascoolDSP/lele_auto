@@ -1,4 +1,4 @@
-"""Merged workbook for Lele (v1), built from her feedback of 2026-10-03 / 10-10.
+"""Lele's single stock workbook: proposal 8 (yearly tracking) plus her feedback of 2026-10-03 / 10-10.
 
 Base: proposal 8 (12 monthly tabs + yearly view). Added: products grouped by storage zone
 (dry store, positive cold room, negative cold room, housekeeping), an order date per week,
@@ -17,7 +17,7 @@ from openpyxl.worksheet.datavalidation import DataValidation
 from build_proposals import (
     BORDER, EXAMPLE_FONT, FONT, GREEN_FILL, INPUT_FILL, MONTHS, ORANGE_FILL, RED_FILL, Theme,
     calc, cell, guide, header, inp, last_filled, negative_red, non_blank_sum, nonneg_validation,
-    save, title, widths,
+    OUT, save, title, widths,
 )
 
 T = Theme("2E6B3F")
@@ -383,6 +383,9 @@ def sheet_year(wb):
         r += 1
         first_data = r
         for z, k, pr, mr in ALL:
+            if k == 0:
+                zone_bar(ws, r, L(len(heads)), ZONES[z])
+                r += 1
             cell(ws, f"A{r}", f'=IF(Produits!$A${pr}="","",Produits!$A${pr})', bold=True)
             cell(ws, f"B{r}", f'=IF(Produits!$A${pr}="","",Produits!$C${pr})', color="555555", align="center")
             for m, mname in enumerate(MONTHS):
@@ -453,7 +456,7 @@ def sheet_register(wb):
 # ---------------------------------------------------------------- build
 def build():
     wb = Workbook()
-    guide(wb, T, "Suivi des stocks — version pour Lele (v1)",
+    guide(wb, T, "Suivi sur l'année — ton tableau de stock",
           "Ton suivi sur l'année, avec tout ce que tu as demandé : les produits rangés par zone (réserve sèche, "
           "chambre froide positive, chambre froide négative, ménager), la date de commande chaque semaine, le "
           "tableau de bord avec les tendances, et le registre de réception qui remplace ton cahier.",
@@ -467,7 +470,7 @@ def build():
            "5. Les chiffres en bleu sont des exemples : efface-les avant de commencer."],
           ["Tableau de bord — dépenses, livraisons incomplètes, produits sous le minimum, tendances, top 10.",
            "Produits — ta liste par zone, avec minimum et prix.", "Fournisseurs — carnet d'adresses.",
-           "Janvier à Décembre — la saisie de chaque semaine.", "Année 2026 — reçu, dépenses et stock de fin de mois.",
+           "Janvier à Décembre — la saisie de chaque semaine.", "Année 2026 — reçu, dépenses et stock de fin de mois, zone par zone.",
            "Réceptions — le registre qui remplace le cahier."])
     sheet_products(wb)
     sheet_suppliers(wb)
@@ -478,7 +481,7 @@ def build():
     sheet_dashboard(wb)
     order = ["Mode d'emploi", "Tableau de bord", "Produits", "Fournisseurs", "Réceptions"] + MONTHS + ["Année 2026"]
     wb._sheets = [wb[n] for n in order]
-    save(wb, "30_version_lele_v1.xlsx")
+    save(wb, "08_suivi_annuel_lele.xlsx", folder=OUT)
     print(wb.sheetnames)
 
 

@@ -15,6 +15,7 @@ from openpyxl.utils import get_column_letter as L
 from openpyxl.worksheet.datavalidation import DataValidation
 
 OUT = Path(__file__).resolve().parent.parent / "share" / "out" / "propositions_stock"
+ARCHIVE = OUT / "archive"  # superseded proposals 01-20, kept out of the review site
 N = 40            # product rows available
 FONT = "Arial"
 INPUT_FILL = PatternFill("solid", fgColor="FFF6D5")
@@ -230,10 +231,10 @@ def last_filled(refs):
     return "=" + f
 
 
-def save(wb, filename):
-    OUT.mkdir(parents=True, exist_ok=True)
+def save(wb, filename, folder=ARCHIVE):
+    folder.mkdir(parents=True, exist_ok=True)
     wb.calculation.fullCalcOnLoad = True  # no cached values: force recalculation on open
-    wb.save(OUT / filename)
+    wb.save(folder / filename)
     print("wrote", filename)
 
 

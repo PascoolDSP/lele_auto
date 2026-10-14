@@ -1,4 +1,6 @@
-"""Render the xlsx proposals as static HTML pages that mimic Excel (for Pascal's review only).
+"""Render Lele's workbook as a static HTML page that mimics Excel, plus a one-card index.
+
+Superseded proposals live in share/out/propositions_stock/archive and archive/site; they are not rendered.
 
 Values come from the `formulas` engine (tools/.venv) since LibreOffice Calc is not installed.
 Conditional formatting is evaluated by writing each rule, translated per cell, into a helper
@@ -24,11 +26,9 @@ SRC = ROOT / "share" / "out" / "propositions_stock"
 SITE = ROOT / "site"
 HELPER = "__cf"
 
-# openpyxl does not read charts back: declare the one chart we generate (see build_proposals.p07)
+# openpyxl does not read charts back: declare the chart build_final.py generates
 CHARTS = {
-    "07": [{"sheet": "Tableau de bord", "anchor": "A23", "title": "Dépenses du mois (€)",
-            "cats": "B11:B20", "vals": "E11:E20", "color": "#3D3D3D", "w": 529, "h": 283}],
-    "30": [{"sheet": "Tableau de bord", "anchor": "G10", "title": "Dépenses du mois (€)",
+    "08": [{"sheet": "Tableau de bord", "anchor": "G10", "title": "Dépenses du mois (€)",
             "cats": "B12:B21", "vals": "E12:E21", "color": "#2E6B3F", "w": 529, "h": 283}],
 }
 
@@ -420,7 +420,7 @@ def build():
               (f'<a class="nav" href="{next_n}.html" aria-label="Proposition suivante">&#8250;</a>' if next_n else '<span class="nav off">&#8250;</span>')
         body = f"""<div class="app">
 <header class="titlebar">
-  <a class="home" href="../index.html" aria-label="Retour aux propositions">&#8592; Propositions</a>
+  <a class="home" href="../index.html" aria-label="Retour à l’accueil">&#8592; Accueil</a>
   <span class="fname">{html.escape(path.name)}</span>
   <span class="tb-right">{nav}<a class="dl" href="../files/{html.escape(path.name)}" download>Télécharger</a></span>
 </header>
@@ -439,24 +439,16 @@ def build():
                 f'<span class="idea">{html.escape(idea)}</span>'
                 f'<span class="file">{html.escape(fname)}</span></a>')
 
-    series = [("Version pour Lele", "Fusion construite sur la n°8 d'après ses retours des 3 et 10 octobre.",
-               [c for c in cards if int(c[0]) >= 30]),
-              ("Première série", "Variantes de mise en page de sa demande.", [c for c in cards if int(c[0]) <= 10]),
-              ("Deuxième série", "Inspirée des modèles existants : cadencier, ordre de la réserve, fiche papier, DLC, pertes…",
-               [c for c in cards if 10 < int(c[0]) < 30])]
-    grid = "".join(
-        f'<section class="series"><h2>{t}</h2><p class="sdesc">{d}</p><div class="cards">'
-        + "".join(card_html(*c) for c in cs) + "</div></section>"
-        for t, d, cs in series if cs)
+    grid = '<div class="cards">' + "".join(card_html(*c) for c in cards) + "</div>"
     body = f"""<div class="index">
 <header class="ihead">
-  <p class="kicker">lele_auto · usage interne</p>
-  <h1>Propositions de tableaux de stock</h1>
-  <p class="lead">{len(cards)} variantes de la même demande : produits et fournisseurs, 4 semaines par mois, stock / commandé / reçu, totaux automatiques. Chaque aperçu reproduit le rendu Excel, avec les valeurs calculées.</p>
+  <p class="kicker">lele_auto · suivi de stock</p>
+  <h1>Ton tableau de stock</h1>
+  <p class="lead">Le suivi sur l’année (n°8) que tu as choisi, avec tout ce que tu as demandé : produits rangés par zone, date de commande chaque semaine, tableau de bord avec tendances et dépenses, registre de réception. Clique pour l’aperçu ; le bouton Télécharger donne le fichier Excel.</p>
 </header>
 <main>{grid}</main>
 </div>"""
-    (SITE / "index.html").write_text(page("Propositions de tableaux de stock — Lele", body), encoding="utf-8")
+    (SITE / "index.html").write_text(page("Tableau de stock — Lele", body), encoding="utf-8")
 
 
 if __name__ == "__main__":

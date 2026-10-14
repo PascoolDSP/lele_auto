@@ -32,13 +32,15 @@ Source material (voice notes, texts, sketch) came in Lele.zip; transcripts were 
   zone — Réserve sèche / Chambre froide positive / Chambre froide négative / Ménager —, an order date per
   week, and a reception register (date, product, supplier per line, quantity, lot number, DLC) replacing
   her paper notebook (photo received). Drops "ce que j'ai utilisé".
-- Open with her: keep the quantity column in the register? (asked in voice note, absent from notebook).
-  Unpaid, volunteer work.
+- Unpaid, volunteer work.
 
 ## In progress
-- v1 merged workbook built: `share/out/propositions_stock/30_version_lele_v1.xlsx`
-  (`tools/build_final.py`, verified 0 errors, previewed as proposal 30 on the site). To send to Lele.
+- Single version online (2026-10-14): proposal 8 + all her requests, `tools/build_final.py` ->
+  `share/out/propositions_stock/08_suivi_annuel_lele.xlsx`, site shows only this one (`propositions/08.html`).
+  Yearly tab now split by zone ("détaillé à chaque partie"). Verified 0 errors. Shown to Lele next.
+- Quantity column in the register is confirmed: she asked for "la quantité que j'ai reçue" (03/10 voice note).
+- Proposals 01-20 and the first merged draft (30) archived: `archive/site/`, `share/out/propositions_stock/archive/`.
 
 ## Next
-- Iterate on the chosen proposal(s) from her feedback.
+- Iterate on the workbook from her feedback.
 - Check the chosen file in real Google Sheets on a phone (not testable on lili).

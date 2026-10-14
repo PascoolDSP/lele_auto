@@ -9,7 +9,7 @@ previews them with an Excel-like rendering for Pascal's review.
 ## Folder / module map
 - `tools/build_proposals.py` — generates the 10 xlsx proposals into `share/out/propositions_stock/`.
 - `tools/build_proposals_2.py` — generates proposals 11-20 (reuses the helpers of build_proposals.py).
-- `tools/build_final.py` — the merged v1 workbook for Lele (proposal 30), reuses build_proposals.py helpers.
+- `tools/build_final.py` — Lele's single workbook (proposal 8 + her feedback, `08_suivi_annuel_lele.xlsx`), reuses build_proposals.py helpers. Superseded proposals are archived (`archive/`); their generators write to `share/out/propositions_stock/archive/`.
 - `tools/verify_proposals.py` — evaluates every formula with the `formulas` engine, reports errors and sample values.
 - `tools/render_site.py` — renders each xlsx to `site/propositions/NN.html` (+ `site/index.html`, `site/files/`).
 - `tools/.venv/` — local venv with `formulas` + `openpyxl` (run the verify/render scripts with it).

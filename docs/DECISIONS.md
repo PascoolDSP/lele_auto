@@ -12,3 +12,5 @@
 - 2026-09-25 — No FILTER/SPARKLINE: lists use INDEX/MATCH on a rank helper, trends use REPT bars — portable across Excel, Sheets and LibreOffice.
 - 2026-10-10 — v1 for Lele = proposal 8 + dashboard + trend bars + zones + order date + reception register, per her feedback; register keeps a supplier column per line (she buys elsewhere when the usual supplier is out).
 - 2026-10-10 — Unit price entered once per product (Produits tab), reused by the dashboard every month; spend is approximate when she buys from another supplier — accepted to avoid per-delivery price entry.
+- 2026-10-14 — Only one workbook stays on the site: proposal 8 with her feedback merged (she chose n°8 in her 03/10 voice note). Other proposals archived, not deleted — they document the options she was shown.
+- 2026-10-14 — Yearly tab grouped by storage zone, as she asked the yearly view to be "détaillé à chaque partie".
